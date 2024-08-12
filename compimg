@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# this is some UGLY ASS code
+# but it works!
+# surprisingly...
+
+while getopts "r:" flag; do
+ case $flag in
+   r) # handle -r
+   RESIZE=true
+   RESVAL="$OPTARG"
+   ;;
+   ?)
+   # makes the script throw an error on unrecognised arg
+   NUHUH=true
+   ;;
+ esac
+done
+if [ "$RESIZE" = "true" ]; then
+echo "Resizing and compressing $3."
+magick $3 -strip -interlace Plane -gaussian-blur 0.05 -resize "$RESVAL"% -quality 85% $3_comp_res.jpg
+elif [ "$NUHUH" = "true" ]; then
+ echo "Syntax is 'compimg (-r (if resizing)) {filename}'."
+else
+echo "Only compressing $1."
+magick $1 -strip -interlace Plane -gaussian-blur 0.05 -quality 85% $1_comp.jpg
+fi
