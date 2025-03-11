@@ -1,8 +1,6 @@
 #!/bin/bash
 
-# this is some UGLY ASS code
-# but it works!
-# surprisingly...
+# very ugly script, but it works so is it really ugly?
 
 while getopts "r:" flag; do
  case $flag in
