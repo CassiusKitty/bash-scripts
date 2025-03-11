@@ -20,10 +20,10 @@ filename="$1"
 resizename="$3"
 if [ "$RESIZE" = "true" ]; then
 echo "Resizing and compressing $resizename."
-magick "$resizename" -strip -interlace Plane -gaussian-blur 0.05 -resize "$RESVAL"% -quality 85% "$3_comp_res.jpg"
+magick "$resizename" -strip -interlace Plane -gaussian-blur 0.05 -resize "$RESVAL"% -quality 95% "$3_comp_res.jpg"
 elif [ "$NUHUH" = "true" ]; then
  echo "Syntax is 'compimg (-r (if resizing)) {filename}'."
 else
 echo "Only compressing $filename."
-magick "$filename" -strip -interlace Plane -gaussian-blur 0.05 -quality 85% "$1_comp.jpg"
+magick "$filename" -strip -interlace Plane -gaussian-blur 0.05 -quality 95% "$1_comp.jpg"
 fi
