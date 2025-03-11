@@ -16,12 +16,14 @@ while getopts "r:" flag; do
    ;;
  esac
 done
+filename="$1"
+resizename="$3"
 if [ "$RESIZE" = "true" ]; then
-echo "Resizing and compressing $3."
-magick $3 -strip -interlace Plane -gaussian-blur 0.05 -resize "$RESVAL"% -quality 85% $3_comp_res.jpg
+echo "Resizing and compressing $resizename."
+magick "$resizename" -strip -interlace Plane -gaussian-blur 0.05 -resize "$RESVAL"% -quality 85% "$3_comp_res.jpg"
 elif [ "$NUHUH" = "true" ]; then
  echo "Syntax is 'compimg (-r (if resizing)) {filename}'."
 else
-echo "Only compressing $1."
-magick $1 -strip -interlace Plane -gaussian-blur 0.05 -quality 85% $1_comp.jpg
+echo "Only compressing $filename."
+magick "$filename" -strip -interlace Plane -gaussian-blur 0.05 -quality 85% "$1_comp.jpg"
 fi
