@@ -1,0 +1,16 @@
+#!/bin/bash
+DIR_NAME="$1"
+FILES="*.jpg *.png"
+cd "$DIR_NAME"
+mkdir "$DIR_NAME/compressed/"
+for file in $FILES;
+do
+# Check if file exists before shitting it out...
+	if [ -f "$file" ]
+	then 
+		echo  "Compressing $file"
+		magick "$file" -strip -interlace Plane -gaussian-blur 0.05 -quality 90% "$DIR_NAME/compressed/$(basename "$file")_comp.jpg"
+	else
+	echo "$file probably doesn't exist."
+	fi
+done
